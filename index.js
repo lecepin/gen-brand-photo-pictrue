@@ -47,7 +47,9 @@ function App() {
         const link = document.createElement("a");
 
         link.download = Date.now() + ".jpg";
-        link.href = data;
+        link.href = URL.createObjectURL(
+          new Blob([file], { type: "image/jpeg" })
+        );
         link.click();
         link.remove();
       });
