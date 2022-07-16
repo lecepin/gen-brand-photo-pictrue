@@ -1,0 +1,22 @@
+[package]
+name = "gen-brand-photo-pictrue"
+version = "0.1.0"
+authors = ["lecepin"]
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["console_error_panic_hook", "wee_alloc"]
+
+[dependencies]
+wasm-bindgen = { version = "0.2.81", features = ["serde-serialize"] }
+console_error_panic_hook = { version = "0.1.7", optional = true }
+wee_alloc = { version = "0.4.5", optional = true }
+web-sys = { version = "0.3.58", features = [] }
+kamadak-exif = "0.5.4"
+serde = { version = "1.0.138", features = ["derive"] }
+
+[profile.release]
+opt-level = "s"
