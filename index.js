@@ -60,7 +60,7 @@ function App() {
       try {
         const result = get_exif(new Uint8Array(e.target.result));
         const resultObj = {};
-console.log(result)
+
         result.map((item) => (resultObj[item.tag] = item));
 
         let formValue = {
@@ -94,6 +94,7 @@ console.log(result)
 
   return (
     <>
+      <Typography.Title level={1}>生成小米12S宣传图风格照片</Typography.Title>
       <div class="preview-box">
         <Typography.Title level={4}>预览</Typography.Title>
         <div class="preview" id="preview">
