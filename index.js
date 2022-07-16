@@ -34,7 +34,7 @@ function App() {
     const zoomRatio = 4;
 
     domtoimage
-      .toJpeg(previewDom, {
+      .toBlob(previewDom, {
         quality: 0.8,
         width: previewDom.clientWidth * zoomRatio,
         height: previewDom.clientHeight * zoomRatio,
@@ -43,13 +43,13 @@ function App() {
           "transform-origin": "top left",
         },
       })
+      .then((data) => window.URL.createObjectURL(data))
       .then((data) => {
         const link = document.createElement("a");
 
-        link.download = Date.now() + ".jpg";
-        link.href = URL.createObjectURL(
-          new Blob([data], { type: "image/jpeg" })
-        );
+        link.download = Date.now() + ".png";
+        link.href = data;
+        document.body.appendChild(link);
         link.click();
         link.remove();
       });
