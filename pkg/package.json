@@ -1,0 +1,15 @@
+{
+  "name": "gen-brand-photo-pictrue",
+  "collaborators": [
+    "lecepin"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "gen_brand_photo_pictrue_bg.wasm",
+    "gen_brand_photo_pictrue.js",
+    "gen_brand_photo_pictrue.d.ts"
+  ],
+  "module": "gen_brand_photo_pictrue.js",
+  "types": "gen_brand_photo_pictrue.d.ts",
+  "sideEffects": false
+}

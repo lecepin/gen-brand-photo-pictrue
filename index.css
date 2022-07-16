@@ -1,0 +1,73 @@
+#app {
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.preview-box {
+  margin-bottom: 16px;
+}
+
+.preview {
+  box-shadow: 7px 4px 15px #ccc;
+  background: #fff;
+}
+
+.preview-picture {
+  max-width: 100%;
+}
+
+.preview-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+}
+.preview-info-left {
+  flex-grow: 1;
+  width: 0;
+  position: relative;
+}
+.preview-info-split {
+  border-left: 2px solid #ddd;
+  height: 39px;
+  margin-top: 6px;
+  margin-right: 12px;
+  margin-left: 12px;
+}
+.preview-info-right {
+}
+.preview-info-model,
+.preview-info-device {
+  font-weight: bold;
+  font-size: 18px;
+}
+.preview-info-date,
+.preview-info-gps {
+  font-size: 14px;
+  color: #aaa;
+}
+.preview-info-brand {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.preview-info-brand img {
+  height: 39px;
+}
+
+.props {
+  margin-top: 20px;
+}
+
+.props .ant-form-inline .ant-form-item {
+  margin-bottom: 10px;
+}
+
+.op {
+  display: flex;
+  justify-content: space-between;
+}
