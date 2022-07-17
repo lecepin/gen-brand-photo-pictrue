@@ -1,6 +1,6 @@
 (function () {
     register({
-      ver: 1,
+      ver: 2,
       path: ".",
       name: "sw.js",
       onUpdate: () => {},

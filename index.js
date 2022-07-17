@@ -33,10 +33,10 @@ function App() {
 
   const handleDownload = () => {
     const previewDom = document.getElementById("preview");
-    const zoomRatio = 2;
+    const zoomRatio = 4;
 
     domtoimage
-      .toBlob(previewDom, {
+      .toJpeg(previewDom, {
         quality: 0.8,
         width: previewDom.clientWidth * zoomRatio,
         height: previewDom.clientHeight * zoomRatio,
@@ -45,11 +45,23 @@ function App() {
           "transform-origin": "top left",
         },
       })
+      .then((data) => {
+        const binaryString = window.atob(data.split(",")[1]);
+        const length = binaryString.length;
+        const binaryArray = new Uint8Array(length);
+
+        for (let i = 0; i < length; i++)
+          binaryArray[i] = binaryString.charCodeAt(i);
+
+        return new Blob([binaryArray], {
+          type: "image/jpeg",
+        });
+      })
       .then((data) => window.URL.createObjectURL(data))
       .then((data) => {
         const link = document.createElement("a");
 
-        link.download = Date.now() + ".png";
+        link.download = Date.now() + ".jpg";
         link.href = data;
         document.body.appendChild(link);
         link.click();
