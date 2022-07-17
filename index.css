@@ -26,6 +26,10 @@
   flex-grow: 1;
   width: 0;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
 }
 .preview-info-split {
   border-left: 2px solid #ddd;

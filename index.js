@@ -92,6 +92,11 @@ function App() {
           }`,
           brand: resultObj?.Make?.value.toLowerCase(),
         };
+        formValue.brand_url = `./brand/${
+          formValue.brand === "未收录"
+            ? "unknow.svg"
+            : (formValue?.brand?.toLowerCase() ?? "unknow") + ".svg"
+        }`;
 
         formRef.current.setFieldsValue(formValue);
         setFormValue(formValue);
@@ -116,13 +121,7 @@ function App() {
               <div class="preview-info-model">{formValue.model}</div>
               <div class="preview-info-date">{formValue.date}</div>
               <div class="preview-info-brand">
-                <img
-                  src={`./brand/${
-                    formValue.brand === "未收录"
-                      ? "unknow.svg"
-                      : (formValue?.brand?.toLowerCase() ?? "unknow") + ".svg"
-                  }`}
-                />
+                <img src={formValue.brand_url} />
               </div>
             </div>
             <div class="preview-info-split"></div>
@@ -141,7 +140,14 @@ function App() {
           layout="inline"
           size="small"
           onValuesChange={(_, value) => {
-            setFormValue(value);
+            setFormValue({
+              ...value,
+              brand_url: `./brand/${
+                value.brand === "未收录"
+                  ? "unknow.svg"
+                  : (value?.brand?.toLowerCase() ?? "unknow") + ".svg"
+              }`,
+            });
           }}
           initialValues={formValue}
         >
@@ -161,9 +167,9 @@ function App() {
           <Form.Item label="时间" name="date">
             <Input />
           </Form.Item>
-          <Form.Item label="图标" name="date">
-            <Input />
-          </Form.Item>
+          {/* <Form.Item label="图标" name="brand_url">
+            <Input disabled />
+          </Form.Item> */}
           <Form.Item label="经纬" name="gps">
             <Input />
           </Form.Item>
