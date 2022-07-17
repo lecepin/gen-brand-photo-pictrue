@@ -14,6 +14,7 @@ function App() {
     gps: `51°30'00"N 0°10'00"E`,
     device: "23mm f/1.0 1/320 ISO1495",
     brand: "leica",
+    brand_url: "./brand/leica.svg",
   });
   const [imgUrl, setImgUrl] = useState("./simple.jpg");
   const brandList = [
