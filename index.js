@@ -26,6 +26,7 @@ function App() {
     "Leica",
     "Xiaomi",
     "Nikon Corporation",
+    "Sony",
     "未收录",
   ];
   const formRef = useRef();
