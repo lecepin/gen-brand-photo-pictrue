@@ -15,6 +15,8 @@ fn main() -> Result<(), Box<dyn Error>> {
             "simple.jpg",
             "index.js",
             "index.css",
+            "sw.js",
+            "sw.reg.mgr.js"
         ],
         dirs: vec!["pkg", "brand"],
     };
