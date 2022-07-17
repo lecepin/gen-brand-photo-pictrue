@@ -39,7 +39,12 @@ pub fn get_exif(raw: Vec<u8>) -> JsValue {
                 value: field
                     .display_value()
                     .to_string()
-                    .replace(|item: char| ["\"", ",", " "].contains(&item.to_string().as_str()), ""),
+                    .replace(
+                        |item: char| ["\"", ","].contains(&item.to_string().as_str()),
+                        "",
+                    )
+                    .trim()
+                    .to_string(),
                 value_with_unit: field
                     .display_value()
                     .with_unit(&exif)

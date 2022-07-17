@@ -24,7 +24,7 @@ function App() {
     "Huawei",
     "Leica",
     "Xiaomi",
-    "Nikon",
+    "Nikon Corporation",
     "未收录",
   ];
   const formRef = useRef();
@@ -65,22 +65,32 @@ function App() {
 
         result.map((item) => (resultObj[item.tag] = item));
 
+        let deviceObj = {
+          focalLen:
+            resultObj?.FocalLengthIn35mmFilm?.value_with_unit ??
+            resultObj?.FocalLength?.value_with_unit,
+          fNum: resultObj?.FNumber?.value_with_unit
+            ?.split("/")
+            ?.map((item, index) => (index == 1 ? (+item).toFixed(1) : item))
+            ?.join("/"),
+          exposureTime: resultObj?.ExposureTime?.value
+            ?.split("/")
+            ?.map((item) => ~~item)
+            ?.join("/"),
+          iso: resultObj?.PhotographicSensitivity?.value,
+        };
         let formValue = {
-          model: resultObj.Model.value,
-          date: resultObj.DateTimeOriginal.value,
-          gps: `${formatGPS(resultObj.GPSLatitude.value_with_unit)} ${formatGPS(
-            resultObj.GPSLongitude.value_with_unit
-          )}`,
-          device: `${
-            resultObj.FocalLengthIn35mmFilm.value_with_unit
-          } ${resultObj.FNumber.value_with_unit
-            .split("/")
-            .map((item, index) => (index == 1 ? (+item).toFixed(1) : item))
-            .join("/")} ${resultObj.ExposureTime.value
-            .split("/")
-            .map((item) => ~~item)
-            .join("/")} ISO ${resultObj.PhotographicSensitivity.value}`,
-          brand: resultObj.Make.value.toLowerCase(),
+          model: resultObj?.Model?.value,
+          date: resultObj?.DateTimeOriginal?.value,
+          gps: `${formatGPS(
+            resultObj?.GPSLatitude?.value_with_unit
+          )} ${formatGPS(resultObj?.GPSLongitude?.value_with_unit)}`,
+          device: `${deviceObj.focalLen ? deviceObj.focalLen + " " : ""}${
+            deviceObj.fNum ? deviceObj.fNum + " " : ""
+          } ${deviceObj.exposureTime ? deviceObj.exposureTime + " " : ""}${
+            deviceObj.iso ? "ISO " + deviceObj.iso + " " : ""
+          }`,
+          brand: resultObj?.Make?.value.toLowerCase(),
         };
 
         formRef.current.setFieldsValue(formValue);
@@ -96,7 +106,7 @@ function App() {
 
   return (
     <>
-      <Typography.Title level={1}>生成小米12S宣传图风格照片</Typography.Title>
+      <Typography.Title level={1}>生成小米 12S 莱卡水印照片</Typography.Title>
       <div class="preview-box">
         <Typography.Title level={4}>预览</Typography.Title>
         <div class="preview" id="preview">
@@ -110,7 +120,7 @@ function App() {
                   src={`./brand/${
                     formValue.brand === "未收录"
                       ? "unknow.svg"
-                      : formValue.brand.toLowerCase() + ".svg"
+                      : (formValue?.brand?.toLowerCase() ?? "unknow") + ".svg"
                   }`}
                 />
               </div>
@@ -190,6 +200,10 @@ function App() {
 ReactDOM.render(<App />, document.getElementById("app"));
 
 function formatGPS(gps) {
+  if (!gps) {
+    return "";
+  }
+
   const [degrees, minutes, seconds, dir] = gps
     .match(/(\d+\.?\d*)|([NSWE]$)/gim)
     .map((item) =>
