@@ -33,7 +33,7 @@ function App() {
 
   const handleDownload = () => {
     const previewDom = document.getElementById("preview");
-    const zoomRatio = 4;
+    const zoomRatio = 2;
 
     domtoimage
       .toBlob(previewDom, {
@@ -89,7 +89,7 @@ function App() {
           )} ${formatGPS(resultObj?.GPSLongitude?.value_with_unit)}`,
           device: `${deviceObj.focalLen ? deviceObj.focalLen + " " : ""}${
             deviceObj.fNum ? deviceObj.fNum + " " : ""
-          } ${deviceObj.exposureTime ? deviceObj.exposureTime + " " : ""}${
+          }${deviceObj.exposureTime ? deviceObj.exposureTime + " " : ""}${
             deviceObj.iso ? "ISO " + deviceObj.iso + " " : ""
           }`,
           brand: resultObj?.Make?.value.toLowerCase(),
